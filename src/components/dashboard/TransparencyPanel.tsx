@@ -8,12 +8,12 @@ const sources = [
 
 export default function TransparencyPanel() {
   return (
-    <div>
-      <h2 className="text-xl font-bold text-foreground mb-6">AI Transparency</h2>
+    <section aria-labelledby="transparency-heading">
+      <h2 id="transparency-heading" className="text-xl font-bold text-foreground mb-6">AI Transparency</h2>
 
       <div className="rounded-xl border border-border bg-card p-6 mb-6">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xl gradient-accent flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl gradient-accent flex items-center justify-center" aria-hidden="true">
             <Brain className="h-5 w-5 text-accent-foreground" />
           </div>
           <div>
@@ -30,17 +30,19 @@ export default function TransparencyPanel() {
 
       <div className="space-y-3 mb-6">
         <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Sources Used</h3>
-        {sources.map((source) => (
-          <div key={source.label} className="flex items-start gap-4 p-4 rounded-xl border border-border bg-card">
-            <div className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center shrink-0">
-              <source.icon className="h-4 w-4 text-muted-foreground" />
-            </div>
-            <div>
-              <p className="font-medium text-foreground text-sm">{source.label}</p>
-              <p className="text-sm text-muted-foreground">{source.detail}</p>
-            </div>
-          </div>
-        ))}
+        <ul aria-label="AI analysis sources">
+          {sources.map((source) => (
+            <li key={source.label} className="flex items-start gap-4 p-4 rounded-xl border border-border bg-card mb-3">
+              <div className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center shrink-0" aria-hidden="true">
+                <source.icon className="h-4 w-4 text-muted-foreground" />
+              </div>
+              <div>
+                <p className="font-medium text-foreground text-sm">{source.label}</p>
+                <p className="text-sm text-muted-foreground">{source.detail}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
 
       <div className="rounded-xl bg-muted/50 border border-border p-6">
@@ -53,6 +55,6 @@ export default function TransparencyPanel() {
           which historically has a high overturn rate on appeal in Georgia (estimated 68% based on state data).
         </p>
       </div>
-    </div>
+    </section>
   );
 }

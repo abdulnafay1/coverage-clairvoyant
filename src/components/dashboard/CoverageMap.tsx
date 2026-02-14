@@ -20,27 +20,33 @@ const iconBg = {
   missing: "bg-red-risk text-accent-foreground",
 };
 
+const statusLabels = {
+  complete: "Complete",
+  warning: "Warning",
+  missing: "Missing",
+};
+
 export default function CoverageMap() {
   return (
-    <div>
-      <h2 className="text-xl font-bold text-foreground mb-6">Coverage Map</h2>
-      <div className="flex flex-col gap-3">
+    <section aria-labelledby="coverage-heading">
+      <h2 id="coverage-heading" className="text-xl font-bold text-foreground mb-6">Coverage Map</h2>
+      <ol className="flex flex-col gap-3" aria-label="Coverage analysis steps">
         {steps.map((step, i) => (
-          <div key={step.label} className="flex items-start gap-4">
+          <li key={step.label} className="flex items-start gap-4">
             {/* Connector line */}
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center" aria-hidden="true">
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${iconBg[step.status]}`}>
                 <step.icon className="h-5 w-5" />
               </div>
               {i < steps.length - 1 && <div className="w-0.5 h-8 bg-border mt-1" />}
             </div>
             <div className={`flex-1 rounded-xl border-2 p-4 ${statusStyles[step.status]}`}>
-              <p className="text-xs font-semibold uppercase tracking-wider opacity-70 mb-1">{step.label}</p>
+              <p className="text-xs font-semibold uppercase tracking-wider opacity-70 mb-1">{step.label} — <span className="sr-only">Status: </span>{statusLabels[step.status]}</p>
               <p className="font-medium text-foreground">{step.value}</p>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
-    </div>
+      </ol>
+    </section>
   );
 }

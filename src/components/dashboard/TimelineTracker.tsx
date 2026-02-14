@@ -14,20 +14,26 @@ const statusStyle = {
   upcoming: "bg-muted text-muted-foreground",
 };
 
+const statusLabel = {
+  complete: "Completed",
+  current: "In progress",
+  upcoming: "Upcoming",
+};
+
 export default function TimelineTracker() {
   return (
-    <div>
-      <h2 className="text-xl font-bold text-foreground mb-2">Timeline & Status</h2>
-      <div className="flex items-center gap-2 mb-8 text-sm">
-        <Clock className="h-4 w-4 text-destructive" />
+    <section aria-labelledby="timeline-heading">
+      <h2 id="timeline-heading" className="text-xl font-bold text-foreground mb-2">Timeline & Status</h2>
+      <div className="flex items-center gap-2 mb-8 text-sm" role="status" aria-label="12 days remaining to submit appeal">
+        <Clock className="h-4 w-4 text-destructive" aria-hidden="true" />
         <span className="font-semibold text-destructive">12 days remaining</span>
         <span className="text-muted-foreground">to submit appeal</span>
       </div>
 
-      <div className="space-y-0">
+      <ol className="space-y-0" aria-label="Claim timeline">
         {events.map((event, i) => (
-          <div key={event.label} className="flex gap-4">
-            <div className="flex flex-col items-center">
+          <li key={event.label} className="flex gap-4">
+            <div className="flex flex-col items-center" aria-hidden="true">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 relative ${statusStyle[event.status]}`}>
                 <event.icon className="h-4 w-4" />
               </div>
@@ -36,13 +42,16 @@ export default function TimelineTracker() {
               )}
             </div>
             <div className="pb-8">
-              <p className="font-semibold text-foreground">{event.label}</p>
+              <p className="font-semibold text-foreground">
+                {event.label}
+                <span className="sr-only"> — {statusLabel[event.status]}</span>
+              </p>
               <p className="text-sm text-muted-foreground mb-1">{event.date}</p>
               <p className="text-sm text-muted-foreground">{event.detail}</p>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
-    </div>
+      </ol>
+    </section>
   );
 }

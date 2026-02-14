@@ -28,8 +28,8 @@ export default function DenialBreakdown() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <div>
-      <h2 className="text-xl font-bold text-foreground mb-6">Denial Breakdown</h2>
+    <section aria-labelledby="denial-heading">
+      <h2 id="denial-heading" className="text-xl font-bold text-foreground mb-6">Denial Breakdown</h2>
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Left: Original denial text */}
         <div className="rounded-xl border border-border bg-card p-6">
@@ -41,11 +41,16 @@ export default function DenialBreakdown() {
               <Tooltip key={i}>
                 <TooltipTrigger asChild>
                   <p
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`Denial clause: ${clause.highlight}. Activate or hover for explanation.`}
                     className={`cursor-pointer transition-colors duration-200 rounded px-1 -mx-1 ${
                       hoveredIdx === i ? "bg-amber-light" : "hover:bg-muted"
                     }`}
                     onMouseEnter={() => setHoveredIdx(i)}
                     onMouseLeave={() => setHoveredIdx(null)}
+                    onFocus={() => setHoveredIdx(i)}
+                    onBlur={() => setHoveredIdx(null)}
                   >
                     {clause.original.split(clause.highlight).map((part, pi, arr) => (
                       <span key={pi}>
@@ -77,6 +82,7 @@ export default function DenialBreakdown() {
                 className={`p-4 rounded-lg border transition-all duration-200 ${
                   hoveredIdx === i ? "border-accent bg-emerald-light shadow-glow" : "border-border"
                 }`}
+                aria-current={hoveredIdx === i ? "true" : undefined}
               >
                 <p className="text-sm font-medium text-foreground mb-1">"{clause.highlight}"</p>
                 <p className="text-sm text-muted-foreground">{clause.explanation}</p>
@@ -85,6 +91,6 @@ export default function DenialBreakdown() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
