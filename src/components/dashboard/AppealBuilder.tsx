@@ -52,7 +52,7 @@ export default function AppealBuilder() {
   return (
     <section aria-labelledby="appeal-heading">
       <h2 id="appeal-heading" className="text-xl font-bold text-foreground mb-6">Appeal Builder Studio</h2>
-      <div className="grid lg:grid-cols-[1fr_280px] gap-6">
+        <div className="grid lg:grid-cols-[1fr_280px] gap-6">
         {/* Editor */}
         <div className="rounded-xl border border-border bg-card overflow-hidden">
           <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/30">
@@ -62,7 +62,7 @@ export default function AppealBuilder() {
           <label htmlFor="appeal-letter" className="sr-only">Appeal letter content</label>
           <textarea
             id="appeal-letter"
-            className="w-full h-[500px] p-6 text-sm font-mono leading-relaxed text-foreground bg-card resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="w-full h-[300px] sm:h-[400px] lg:h-[500px] p-4 sm:p-6 text-sm font-mono leading-relaxed text-foreground bg-card resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             defaultValue={mockLetter}
           />
         </div>

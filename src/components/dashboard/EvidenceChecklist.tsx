@@ -16,7 +16,7 @@ export default function EvidenceChecklist() {
         {items.map((item) => (
           <li
             key={item.label}
-            className={`flex items-center gap-4 p-5 rounded-xl border-2 transition-colors ${
+            className={`flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl border-2 transition-colors ${
               item.status === "uploaded"
                 ? "border-emerald/30 bg-emerald-light"
                 : "border-red-risk/30 bg-red-risk-light"
