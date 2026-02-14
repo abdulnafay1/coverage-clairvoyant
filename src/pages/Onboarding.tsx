@@ -33,7 +33,7 @@ export default function Onboarding() {
 
   const handleNext = () => {
     if (step < 3) setStep(step + 1);
-    else navigateWithLoader("/dashboard");
+    else navigateWithLoader("/analyzing");
   };
 
   const stepLabels = ["Select Denial Type", "Upload Documents", "Patient Information"];
