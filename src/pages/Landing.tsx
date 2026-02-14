@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { Shield, BarChart3, FileCheck, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { usePageTransition } from "@/hooks/usePageTransition";
+import PageLoader from "@/components/PageLoader";
 import heroImage from "@/assets/hero-illustration.png";
 
 const features = [
@@ -32,9 +33,11 @@ const fadeUp = {
 };
 
 export default function Landing() {
-  const navigate = useNavigate();
+  const { loading, navigateWithLoader } = usePageTransition();
 
   return (
+    <>
+    {loading && <PageLoader />}
     <div className="min-h-screen bg-background">
       <a href="#main-content" className="skip-link">Skip to main content</a>
 
@@ -45,7 +48,7 @@ export default function Landing() {
             <Shield className="h-7 w-7 text-accent" aria-hidden="true" />
             <span className="text-xl font-bold text-foreground">ClaimPilot AI</span>
           </div>
-          <Button variant="default" size="sm" onClick={() => navigate("/onboarding")}>
+          <Button variant="default" size="sm" onClick={() => navigateWithLoader("/onboarding")}>
             Get Started
           </Button>
         </div>
@@ -72,11 +75,11 @@ export default function Landing() {
                 Upload your denial. We analyze your policy, score your case, and generate a stronger appeal — in minutes, not weeks.
               </motion.p>
               <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4">
-                <Button size="lg" className="gradient-accent text-accent-foreground shadow-glow px-8 h-12 text-base font-semibold" onClick={() => navigate("/onboarding")}>
+                <Button size="lg" className="gradient-accent text-accent-foreground shadow-glow px-8 h-12 text-base font-semibold" onClick={() => navigateWithLoader("/onboarding")}>
                   Analyze My Claim
                   <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                 </Button>
-                <Button variant="outline" size="lg" className="h-12 text-base px-8" onClick={() => navigate("/dashboard")}>
+                <Button variant="outline" size="lg" className="h-12 text-base px-8" onClick={() => navigateWithLoader("/dashboard")}>
                   See Demo
                 </Button>
               </motion.div>
@@ -149,5 +152,6 @@ export default function Landing() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
