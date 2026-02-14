@@ -1,0 +1,43 @@
+import { useState } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
+import TopBar from "@/components/dashboard/TopBar";
+import ClaimScorePanel from "@/components/dashboard/ClaimScorePanel";
+import DenialBreakdown from "@/components/dashboard/DenialBreakdown";
+import CoverageMap from "@/components/dashboard/CoverageMap";
+import AppealBuilder from "@/components/dashboard/AppealBuilder";
+import EvidenceChecklist from "@/components/dashboard/EvidenceChecklist";
+import TimelineTracker from "@/components/dashboard/TimelineTracker";
+import RiskInsights from "@/components/dashboard/RiskInsights";
+import TransparencyPanel from "@/components/dashboard/TransparencyPanel";
+
+function DashboardHome() {
+  return (
+    <div className="space-y-8">
+      <ClaimScorePanel />
+      <DenialBreakdown />
+      <CoverageMap />
+    </div>
+  );
+}
+
+export default function Dashboard() {
+  return (
+    <div className="flex min-h-screen w-full bg-background">
+      <DashboardSidebar />
+      <div className="flex-1 flex flex-col min-w-0">
+        <TopBar />
+        <main className="flex-1 p-8 overflow-y-auto">
+          <Routes>
+            <Route index element={<DashboardHome />} />
+            <Route path="appeal" element={<AppealBuilder />} />
+            <Route path="evidence" element={<EvidenceChecklist />} />
+            <Route path="timeline" element={<TimelineTracker />} />
+            <Route path="risk" element={<RiskInsights />} />
+            <Route path="transparency" element={<TransparencyPanel />} />
+          </Routes>
+        </main>
+      </div>
+    </div>
+  );
+}
