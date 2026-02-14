@@ -22,7 +22,7 @@ export default function TransparencyPanel() {
           </div>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          ClaimPilot AI analyzed your denial letter, insurance policy, and medical documentation against CPT coding standards and state insurance regulations. 
+          CareClaim analyzed your denial letter, insurance policy, and medical documentation against CPT coding standards and state insurance regulations. 
           The analysis cross-referenced 3 policy clauses, verified medical necessity criteria against AAOS guidelines, and identified 2 procedural deficiencies 
           in the denial that can be challenged on appeal.
         </p>

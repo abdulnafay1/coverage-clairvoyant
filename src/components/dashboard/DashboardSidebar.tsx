@@ -18,7 +18,7 @@ export default function DashboardSidebar() {
     <aside className="w-64 min-h-screen bg-sidebar text-sidebar-foreground flex flex-col shrink-0" aria-label="Dashboard navigation">
       <div className="p-6 flex items-center gap-2.5">
         <Shield className="h-7 w-7 text-sidebar-primary" aria-hidden="true" />
-        <span className="text-lg font-bold text-sidebar-primary-foreground">ClaimPilot AI</span>
+        <span className="text-lg font-bold text-sidebar-primary-foreground">CareClaim</span>
       </div>
       <nav aria-label="Dashboard sections">
         <ul className="px-3 space-y-1">

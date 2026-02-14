@@ -49,7 +49,7 @@ export default function Onboarding() {
         <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Shield className="h-6 w-6 text-accent" aria-hidden="true" />
-            <span className="text-lg font-bold text-foreground">ClaimPilot AI</span>
+            <span className="text-lg font-bold text-foreground">CareClaim</span>
           </div>
           <button
             onClick={() => navigateWithLoader("/")}

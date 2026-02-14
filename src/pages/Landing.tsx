@@ -46,7 +46,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Shield className="h-7 w-7 text-accent" aria-hidden="true" />
-            <span className="text-xl font-bold text-foreground">ClaimPilot AI</span>
+            <span className="text-xl font-bold text-foreground">CareClaim</span>
           </div>
           <Button variant="default" size="sm" onClick={() => navigateWithLoader("/onboarding")}>
             Get Started
@@ -94,7 +94,7 @@ export default function Landing() {
               <div className="absolute -inset-4 rounded-3xl bg-primary/5 blur-3xl" aria-hidden="true" />
               <img
                 src={heroImage}
-                alt="Preview of the ClaimPilot AI dashboard showing claim strength scoring and appeal builder features"
+                alt="Preview of the CareClaim dashboard showing claim strength scoring and appeal builder features"
                 className="relative rounded-2xl shadow-card w-full"
               />
             </motion.div>
@@ -146,9 +146,9 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto flex items-center justify-between text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <Shield className="h-5 w-5 text-accent" aria-hidden="true" />
-            <span className="font-semibold text-foreground">ClaimPilot AI</span>
+            <span className="font-semibold text-foreground">CareClaim</span>
           </div>
-          <p>© 2026 ClaimPilot AI. All rights reserved.</p>
+          <p>© 2026 CareClaim. All rights reserved.</p>
         </div>
       </footer>
     </div>

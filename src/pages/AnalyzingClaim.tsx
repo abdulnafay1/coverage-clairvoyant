@@ -47,7 +47,7 @@ export default function AnalyzingClaim() {
       >
         <div className="flex items-center justify-center gap-2 mb-2">
           <Shield className="h-7 w-7 text-accent" />
-          <span className="text-xl font-bold text-foreground">ClaimPilot AI</span>
+          <span className="text-xl font-bold text-foreground">CareClaim</span>
         </div>
 
         <div className="relative mx-auto w-20 h-20">
