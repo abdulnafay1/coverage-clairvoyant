@@ -15,7 +15,7 @@ export default function ClaimScorePanel() {
   return (
     <section aria-labelledby="claim-score-heading">
       <h2 id="claim-score-heading" className="text-xl font-bold text-foreground mb-6">Claim Strength Score</h2>
-      <div className="flex flex-col lg:flex-row gap-8 items-start">
+      <div className="flex flex-col items-center lg:flex-row gap-8 lg:items-start">
         {/* Circular gauge */}
         <div className="relative flex items-center justify-center shrink-0" role="meter" aria-valuenow={score} aria-valuemin={0} aria-valuemax={100} aria-label={`Claim strength score: ${score} out of 100`}>
           <svg width="180" height="180" className="-rotate-90" aria-hidden="true">

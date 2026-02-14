@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import TopBar from "@/components/dashboard/TopBar";
@@ -21,13 +22,15 @@ function DashboardHome() {
 }
 
 export default function Dashboard() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div className="flex min-h-screen w-full bg-background">
       <a href="#dashboard-main" className="skip-link">Skip to main content</a>
-      <DashboardSidebar />
+      <DashboardSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="flex-1 flex flex-col min-w-0">
-        <TopBar />
-        <main id="dashboard-main" className="flex-1 p-8 overflow-y-auto">
+        <TopBar onMenuClick={() => setSidebarOpen(true)} />
+        <main id="dashboard-main" className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
           <Routes>
             <Route index element={<DashboardHome />} />
             <Route path="appeal" element={<AppealBuilder />} />
