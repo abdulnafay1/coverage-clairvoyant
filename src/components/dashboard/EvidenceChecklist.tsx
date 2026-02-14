@@ -10,11 +10,11 @@ const items = [
 
 export default function EvidenceChecklist() {
   return (
-    <div>
-      <h2 className="text-xl font-bold text-foreground mb-6">Evidence Checklist</h2>
-      <div className="space-y-3">
+    <section aria-labelledby="evidence-heading">
+      <h2 id="evidence-heading" className="text-xl font-bold text-foreground mb-6">Evidence Checklist</h2>
+      <ul className="space-y-3" aria-label="Required evidence documents">
         {items.map((item) => (
-          <div
+          <li
             key={item.label}
             className={`flex items-center gap-4 p-5 rounded-xl border-2 transition-colors ${
               item.status === "uploaded"
@@ -24,7 +24,7 @@ export default function EvidenceChecklist() {
           >
             <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${
               item.status === "uploaded" ? "gradient-accent" : "bg-red-risk"
-            }`}>
+            }`} aria-hidden="true">
               {item.status === "uploaded" ? (
                 <Check className="h-5 w-5 text-accent-foreground" />
               ) : (
@@ -45,13 +45,16 @@ export default function EvidenceChecklist() {
               <p className="text-sm text-muted-foreground">Risk if missing: {item.risk}</p>
             </div>
             {item.status === "missing" && (
-              <button className="flex items-center gap-1.5 text-sm font-medium text-primary hover:text-accent transition-colors">
-                <Upload className="h-4 w-4" /> Upload
+              <button
+                className="flex items-center gap-1.5 text-sm font-medium text-primary hover:text-accent transition-colors"
+                aria-label={`Upload ${item.label}`}
+              >
+                <Upload className="h-4 w-4" aria-hidden="true" /> Upload
               </button>
             )}
-          </div>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </section>
   );
 }

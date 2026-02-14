@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import TopBar from "@/components/dashboard/TopBar";
 import ClaimScorePanel from "@/components/dashboard/ClaimScorePanel";
@@ -24,10 +23,11 @@ function DashboardHome() {
 export default function Dashboard() {
   return (
     <div className="flex min-h-screen w-full bg-background">
+      <a href="#dashboard-main" className="skip-link">Skip to main content</a>
       <DashboardSidebar />
       <div className="flex-1 flex flex-col min-w-0">
         <TopBar />
-        <main className="flex-1 p-8 overflow-y-auto">
+        <main id="dashboard-main" className="flex-1 p-8 overflow-y-auto">
           <Routes>
             <Route index element={<DashboardHome />} />
             <Route path="appeal" element={<AppealBuilder />} />

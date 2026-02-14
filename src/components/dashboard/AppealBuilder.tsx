@@ -50,30 +50,34 @@ export default function AppealBuilder() {
   const [selectedTone, setSelectedTone] = useState("Formal Legal");
 
   return (
-    <div>
-      <h2 className="text-xl font-bold text-foreground mb-6">Appeal Builder Studio</h2>
+    <section aria-labelledby="appeal-heading">
+      <h2 id="appeal-heading" className="text-xl font-bold text-foreground mb-6">Appeal Builder Studio</h2>
       <div className="grid lg:grid-cols-[1fr_280px] gap-6">
         {/* Editor */}
         <div className="rounded-xl border border-border bg-card overflow-hidden">
           <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/30">
-            <FileText className="h-4 w-4 text-muted-foreground" />
+            <FileText className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
             <span className="text-sm font-medium text-muted-foreground">Appeal Letter Draft</span>
           </div>
+          <label htmlFor="appeal-letter" className="sr-only">Appeal letter content</label>
           <textarea
-            className="w-full h-[500px] p-6 text-sm font-mono leading-relaxed text-foreground bg-card resize-none focus:outline-none"
+            id="appeal-letter"
+            className="w-full h-[500px] p-6 text-sm font-mono leading-relaxed text-foreground bg-card resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             defaultValue={mockLetter}
           />
         </div>
 
         {/* Side panel */}
         <div className="space-y-6">
-          <div className="rounded-xl border border-border bg-card p-5">
-            <h3 className="text-sm font-semibold text-foreground mb-3">Tone Selector</h3>
-            <div className="space-y-2">
+          <fieldset className="rounded-xl border border-border bg-card p-5">
+            <legend className="text-sm font-semibold text-foreground mb-3 px-1">Tone Selector</legend>
+            <div className="space-y-2" role="radiogroup" aria-label="Appeal letter tone">
               {tones.map((tone) => (
                 <button
                   key={tone}
                   onClick={() => setSelectedTone(tone)}
+                  role="radio"
+                  aria-checked={selectedTone === tone}
                   className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
                     selectedTone === tone
                       ? "gradient-accent text-accent-foreground shadow-glow"
@@ -84,10 +88,10 @@ export default function AppealBuilder() {
                 </button>
               ))}
             </div>
-          </div>
+          </fieldset>
 
           <Button className="w-full gradient-accent text-accent-foreground shadow-glow gap-2 h-11">
-            <Download className="h-4 w-4" />
+            <Download className="h-4 w-4" aria-hidden="true" />
             Download as PDF
           </Button>
 
@@ -102,6 +106,6 @@ export default function AppealBuilder() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
