@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Shield, ArrowRight, ArrowLeft, Upload, Stethoscope, AlertTriangle, Pill, MapPin, FileText, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { usePageTransition } from "@/hooks/usePageTransition";
+import PageLoader from "@/components/PageLoader";
 
 const denialTypes = [
   { id: "surgery", label: "Surgery", icon: Stethoscope, desc: "Surgical procedure denial" },
@@ -22,7 +23,7 @@ const docSlots = [
 ];
 
 export default function Onboarding() {
-  const navigate = useNavigate();
+  const { loading, navigateWithLoader } = usePageTransition();
   const [step, setStep] = useState(1);
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [uploadedDocs, setUploadedDocs] = useState<Record<string, string>>({});
@@ -32,12 +33,14 @@ export default function Onboarding() {
 
   const handleNext = () => {
     if (step < 3) setStep(step + 1);
-    else navigate("/dashboard");
+    else navigateWithLoader("/dashboard");
   };
 
   const stepLabels = ["Select Denial Type", "Upload Documents", "Patient Information"];
 
   return (
+    <>
+    {loading && <PageLoader />}
     <div className="min-h-screen bg-background flex flex-col">
       <a href="#onboarding-content" className="skip-link">Skip to content</a>
 
@@ -49,7 +52,7 @@ export default function Onboarding() {
             <span className="text-lg font-bold text-foreground">ClaimPilot AI</span>
           </div>
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigateWithLoader("/")}
             className="text-muted-foreground hover:text-foreground transition-colors p-2 rounded-md"
             aria-label="Close onboarding and return to home"
           >
@@ -164,7 +167,7 @@ export default function Onboarding() {
       {/* Bottom bar */}
       <footer className="border-t border-border bg-card/80 backdrop-blur-lg">
         <div className="max-w-3xl mx-auto px-6 py-4 flex justify-between">
-          <Button variant="ghost" onClick={() => step > 1 ? setStep(step - 1) : navigate("/")} className="gap-2">
+          <Button variant="ghost" onClick={() => step > 1 ? setStep(step - 1) : navigateWithLoader("/")} className="gap-2">
             <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Back
           </Button>
           <Button onClick={handleNext} disabled={!canProceed} className="gradient-accent text-accent-foreground shadow-glow gap-2 px-8" aria-label={step === 3 ? "Analyze claim and go to dashboard" : `Continue to step ${step + 1}`}>
@@ -173,5 +176,6 @@ export default function Onboarding() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
