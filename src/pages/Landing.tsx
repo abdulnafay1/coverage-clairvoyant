@@ -48,7 +48,7 @@ export default function Landing() {
             <Shield className="h-7 w-7 text-accent" aria-hidden="true" />
             <span className="text-xl font-bold text-foreground">CareClaim</span>
           </div>
-          <Button variant="default" size="sm" onClick={() => navigateWithLoader("/onboarding")}>
+          <Button variant="default" size="sm" onClick={() => navigateWithLoader("/choose-path")}>
             Get Started
           </Button>
         </div>
@@ -75,8 +75,8 @@ export default function Landing() {
                 Upload your denial. We analyze your policy, score your case, and generate a stronger appeal — in minutes, not weeks.
               </motion.p>
               <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4">
-                <Button size="lg" className="gradient-accent text-accent-foreground shadow-glow px-8 h-12 text-base font-semibold" onClick={() => navigateWithLoader("/onboarding")}>
-                  Analyze My Claim
+                <Button size="lg" className="gradient-accent text-accent-foreground shadow-glow px-8 h-12 text-base font-semibold" onClick={() => navigateWithLoader("/choose-path")}>
+                  Get Started
                   <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                 </Button>
                 <Button variant="outline" size="lg" className="h-12 text-base px-8" onClick={() => navigateWithLoader("/dashboard")}>
