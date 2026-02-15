@@ -91,7 +91,8 @@ CareClaim aims to:
 
 ## 🛠 Tech Stack
 
-- React + TypeScript (Vite)
-- Tailwind CSS + shadcn-ui
-- Supabase (Storage + Edge Functions)
-- AI analysis via gateway API
+- **Frontend:** React + TypeScript (Vite)
+- **UI:** Tailwind CSS + shadcn-ui
+- **Backend & Storage:** Supabase (Storage + Edge Functions)
+- **AI:** Google Gemini API (via hackathon track)
+- **State & Data:** React Query
