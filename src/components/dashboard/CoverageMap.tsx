@@ -1,11 +1,12 @@
 import { ArrowRight, Check, X, AlertTriangle } from "lucide-react";
+import { useClaim } from "@/contexts/ClaimContext";
 
-const steps = [
-  { label: "Procedure", value: "Knee Arthroscopy (CPT 29881)", status: "complete" as const, icon: Check },
-  { label: "Relevant Policy Clause", value: "Section 4.2.1 — Orthopedic Surgery Coverage", status: "complete" as const, icon: Check },
-  { label: "Exclusions", value: "Elective procedures without prior authorization", status: "warning" as const, icon: AlertTriangle },
-  { label: "Conditions Required", value: "Physician attestation of medical necessity", status: "warning" as const, icon: AlertTriangle },
-  { label: "Missing Documentation", value: "Pre-authorization form, Specialist referral letter", status: "missing" as const, icon: X },
+const fallbackSteps = [
+  { label: "Procedure", value: "Knee Arthroscopy (CPT 29881)", status: "complete" as const },
+  { label: "Relevant Policy Clause", value: "Section 4.2.1 — Orthopedic Surgery Coverage", status: "complete" as const },
+  { label: "Exclusions", value: "Elective procedures without prior authorization", status: "warning" as const },
+  { label: "Conditions Required", value: "Physician attestation of medical necessity", status: "warning" as const },
+  { label: "Missing Documentation", value: "Pre-authorization form, Specialist referral letter", status: "missing" as const },
 ];
 
 const statusStyles = {
@@ -26,26 +27,33 @@ const statusLabels = {
   missing: "Missing",
 };
 
+const iconMap = { complete: Check, warning: AlertTriangle, missing: X };
+
 export default function CoverageMap() {
+  const { analysis } = useClaim();
+  const steps = analysis?.coverageMap?.steps ?? fallbackSteps;
+
   return (
     <section aria-labelledby="coverage-heading">
       <h2 id="coverage-heading" className="text-xl font-bold text-foreground mb-6">Coverage Map</h2>
       <ol className="flex flex-col gap-3" aria-label="Coverage analysis steps">
-        {steps.map((step, i) => (
-          <li key={step.label} className="flex items-start gap-4">
-            {/* Connector line */}
-            <div className="flex flex-col items-center" aria-hidden="true">
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${iconBg[step.status]}`}>
-                <step.icon className="h-5 w-5" />
+        {steps.map((step, i) => {
+          const IconComp = iconMap[step.status] || Check;
+          return (
+            <li key={step.label} className="flex items-start gap-4">
+              <div className="flex flex-col items-center" aria-hidden="true">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${iconBg[step.status]}`}>
+                  <IconComp className="h-5 w-5" />
+                </div>
+                {i < steps.length - 1 && <div className="w-0.5 h-8 bg-border mt-1" />}
               </div>
-              {i < steps.length - 1 && <div className="w-0.5 h-8 bg-border mt-1" />}
-            </div>
-            <div className={`flex-1 rounded-xl border-2 p-4 ${statusStyles[step.status]}`}>
-              <p className="text-xs font-semibold uppercase tracking-wider opacity-70 mb-1">{step.label} — <span className="sr-only">Status: </span>{statusLabels[step.status]}</p>
-              <p className="font-medium text-foreground">{step.value}</p>
-            </div>
-          </li>
-        ))}
+              <div className={`flex-1 rounded-xl border-2 p-4 ${statusStyles[step.status]}`}>
+                <p className="text-xs font-semibold uppercase tracking-wider opacity-70 mb-1">{step.label} — <span className="sr-only">Status: </span>{statusLabels[step.status]}</p>
+                <p className="font-medium text-foreground">{step.value}</p>
+              </div>
+            </li>
+          );
+        })}
       </ol>
     </section>
   );
