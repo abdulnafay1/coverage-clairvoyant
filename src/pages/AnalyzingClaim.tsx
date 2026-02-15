@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Shield, FileSearch, Brain, BarChart3, CheckCircle } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
@@ -16,6 +16,8 @@ const stages = [
 
 export default function AnalyzingClaim() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const flow = searchParams.get("flow");
   const { onboardingData, setAnalysis } = useClaim();
   const [progress, setProgress] = useState(0);
   const [stageIndex, setStageIndex] = useState(0);
@@ -77,7 +79,7 @@ export default function AnalyzingClaim() {
   // Navigate when both API and animation are done
   useEffect(() => {
     if (apiDone && animDone) {
-      setTimeout(() => navigate("/dashboard"), 400);
+      setTimeout(() => navigate(flow === "file" ? "/file-claim/dashboard" : "/dashboard"), 400);
     }
   }, [apiDone, animDone, navigate]);
 
