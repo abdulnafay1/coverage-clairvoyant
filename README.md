@@ -1,73 +1,31 @@
-# Welcome to your Lovable project
+# CareClaim
 
-## Project info
+CareClaim is an insurance assistant that helps people fight back against insurance claim denials.
+You upload your denial and supporting docs, CareClaim analyzes them against policy language and medical coding standards, then generates an appeal strategy and a draft appeal letter.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## What it does
 
-## How can I edit this code?
+- **Claim Strength Score**: Scores your appeal potential and breaks down what is strong vs weak.
+- **Denial Breakdown**: Highlights the key denial phrases and explains what they mean in plain English.
+- **Coverage Map**: Maps your procedure to relevant policy clauses, exclusions, and missing requirements.
+- **Appeal Builder**: Produces a structured appeal letter draft (with a tone selector UI).
+- **Evidence Checklist**: Shows what documents you have vs what you are missing, and why each item matters.
+- **Timeline Tracker**: Tracks deadlines and appeal milestones (based on the analysis response).
+- **AI Transparency**: Shows confidence, sources used, and a short explanation of reasoning.
 
-There are several ways of editing your application.
+## How it works (high level)
 
-**Use Lovable**
+1. You go through onboarding and upload documents (policy, denial letter, medical reports).
+2. Files are stored in **Supabase Storage** (bucket: `claim-documents`).
+3. The app calls a Supabase **Edge Function**: `analyze-claim`.
+4. The edge function downloads the uploaded files, sends them (multimodal) to an AI model via **Lovable AI Gateway** (Gemini), and returns a **strict JSON** object.
+5. The dashboard renders that JSON into the panels above.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Tech stack
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- Vite + React + TypeScript
+- Tailwind CSS + shadcn-ui + Radix UI
+- React Router
+- TanStack React Query
+- Supabase (Storage + Edge Functions)
+- Framer Motion (animations)
