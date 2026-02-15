@@ -111,15 +111,25 @@ export default function Onboarding() {
               <h2 id="step2-heading" className="text-2xl font-bold text-foreground mb-2">Upload your documents</h2>
               <p className="text-muted-foreground mb-8">Drag and drop or click to upload. These help our AI analyze your case.</p>
               <div className="space-y-4">
-                {docSlots.map((doc) => (
-                  <button
+              {docSlots.map((doc) => (
+                  <label
                     key={doc.id}
-                    className={`w-full relative flex items-center gap-4 p-6 rounded-xl border-2 border-dashed transition-all duration-200 text-left hover:border-accent/60 ${
+                    className={`w-full relative flex items-center gap-4 p-6 rounded-xl border-2 border-dashed transition-all duration-200 text-left hover:border-accent/60 cursor-pointer ${
                       uploadedDocs[doc.id] ? "border-accent bg-emerald-light" : "border-border bg-card"
                     }`}
-                    onClick={() => setUploadedDocs((prev) => ({ ...prev, [doc.id]: doc.label + ".pdf" }))}
                     aria-label={`Upload ${doc.label}${uploadedDocs[doc.id] ? " — uploaded" : ""}`}
                   >
+                    <input
+                      type="file"
+                      accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                      className="sr-only"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          setUploadedDocs((prev) => ({ ...prev, [doc.id]: file.name }));
+                        }
+                      }}
+                    />
                     <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${uploadedDocs[doc.id] ? "gradient-accent" : "bg-muted"}`} aria-hidden="true">
                       <Upload className={`h-5 w-5 ${uploadedDocs[doc.id] ? "text-accent-foreground" : "text-muted-foreground"}`} />
                     </div>
@@ -127,7 +137,7 @@ export default function Onboarding() {
                       <p className="font-semibold text-foreground">{doc.label}</p>
                       <p className="text-sm text-muted-foreground">{uploadedDocs[doc.id] ? `✓ ${uploadedDocs[doc.id]}` : doc.desc}</p>
                     </div>
-                  </button>
+                  </label>
                 ))}
               </div>
             </motion.div>
