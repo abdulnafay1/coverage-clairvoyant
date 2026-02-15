@@ -1,74 +1,97 @@
 # CareClaim
 
-CareClaim is an insurance assistant that helps you manage claims and fight back against claim denials.
+CareClaim is an AI-powered insurance assistant that helps people file stronger claims and successfully appeal denials.
 
-It focuses on two core workflows:
-
-1. **Filing a new claim**
-2. **Appealing a denied claim**
-
-The app analyzes your documents, explains insurance language in plain English, and helps you build a strong submission or appeal package.
+We turn complex insurance documents into clear, actionable guidance — so patients can recover the coverage they already paid for.
 
 ---
 
-## Core Features
+## 🚨 The Problem
+
+Health insurance denials are far more common than most people realize.
+
+- Over **73 million claims** are denied each year in the U.S.
+- **15–20%** of in-network claims face initial denial
+- Americans hold **$220+ billion** in medical debt
+
+But the biggest issue isn’t denial itself.
+
+---
+
+## 💡 The Core Insight
+
+The appeals process works — people just don’t use it.
+
+- Only **2% of denied claims are appealed**
+- Yet **90% of appeals succeed** partially or fully
+
+This gap exists because patients lack time, knowledge, and tools to navigate complex insurance language.
+
+CareClaim exists to close that gap.
+
+---
+
+## 🧠 What CareClaim Does
+
+CareClaim guides users through two key workflows:
 
 ### 1️⃣ File a Claim
+Prepare complete, policy-aligned claims to reduce the chance of denial.
 
-CareClaim guides users through preparing and submitting a new claim.
-
-**What it helps with**
-
-- Organizing required documents (policy, invoices, medical reports, etc.)
-- Checking for missing information before submission
-- Explaining coverage requirements in simple terms
-- Creating a structured claim summary you can submit to your insurer
-
-**Goal:** Reduce the chance of denial by ensuring the claim is complete and aligned with policy requirements.
+### 2️⃣ Appeal a Denial
+Analyze rejection reasons and generate a structured appeal package ready for submission.
 
 ---
 
-### 2️⃣ Appeal a Denied Claim
+## ⚙️ Key Features
 
-If your claim is rejected, CareClaim analyzes the denial and helps you build an appeal.
+### AI Analysis
+Extracts coverage clauses and identifies denial reasons from uploaded documents.
 
-**What it helps with**
+### Plain English Explanations
+Translates complex insurance jargon into clear guidance.
 
-- Breaking down the denial reason
-- Mapping your case to relevant policy clauses
-- Identifying missing evidence
-- Generating an appeal strategy
-- Drafting a structured appeal letter
+### Claim Strength Score
+Shows probability of a successful appeal based on policy alignment.
 
-**Goal:** Increase your chances of overturning the denial with a clear, evidence-based appeal.
+### Evidence Checklist
+Ensures no critical documentation is missing.
 
----
+### Deadline Tracking
+Monitors appeal timelines and prevents missed submission windows.
 
-## Additional Capabilities
-
-- Claim strength scoring
-- Evidence checklist
-- Policy clause matching
-- Timeline and deadline awareness
-- AI transparency panel (confidence + reasoning)
-- Plain-English explanations of insurance terminology
+### Packet Builder
+Generates complete, properly formatted appeal letters and evidence packages.
 
 ---
 
-## How It Works (High Level)
+## 🔄 How It Works
 
-1. User uploads claim or denial documents.
-2. Files are stored in Supabase Storage (`claim-documents` bucket).
-3. The app calls the `analyze-claim` Supabase Edge Function.
-4. The function sends documents to the Gemini API/Patriot AI.
-5. The response returns structured JSON used to power the dashboard insights.
+1. Upload policy documents and claim or denial letter
+2. AI analyzes coverage clauses and denial reasons
+3. Receive a claim strength score and checklist
+4. Generate a structured appeal packet ready for submission
+
+CareClaim transforms unstructured documents into structured action — automatically.
 
 ---
 
-## Tech Stack
+## 🌍 Impact
+
+CareClaim aims to:
+
+- Reduce medical debt by helping patients recover eligible coverage
+- Increase appeal utilization by removing knowledge barriers
+- Democratize insurance literacy
+- Restore fairness in the claims process
+
+**Vision:** A future where no patient pays for care that should have been covered.
+
+---
+
+## 🛠 Tech Stack
 
 - React + TypeScript (Vite)
-- Tailwind CSS + shadcn-ui + Radix UI
+- Tailwind CSS + shadcn-ui
 - Supabase (Storage + Edge Functions)
-- React Query
-- Framer Motion
+- AI analysis via gateway API
