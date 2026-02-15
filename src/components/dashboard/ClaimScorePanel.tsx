@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-import { useClaim } from "@/contexts/ClaimContext";
 
-const fallbackBreakdowns = [
+const breakdowns = [
   { label: "Policy Coverage Match", value: 85, color: "text-emerald" },
   { label: "Documentation Strength", value: 60, color: "text-amber" },
   { label: "Medical Necessity", value: 92, color: "text-emerald" },
@@ -9,19 +8,7 @@ const fallbackBreakdowns = [
 ];
 
 export default function ClaimScorePanel() {
-  const { analysis } = useClaim();
-
-  const score = analysis?.claimScore?.overall ?? 78;
-  const label = analysis?.claimScore?.label ?? "Strong Appeal Potential";
-  const breakdowns = analysis
-    ? [
-        { label: "Policy Coverage Match", value: analysis.claimScore.policyCoverageMatch, color: analysis.claimScore.policyCoverageMatch >= 80 ? "text-emerald" : "text-amber" },
-        { label: "Documentation Strength", value: analysis.claimScore.documentationStrength, color: analysis.claimScore.documentationStrength >= 80 ? "text-emerald" : "text-amber" },
-        { label: "Medical Necessity", value: analysis.claimScore.medicalNecessity, color: analysis.claimScore.medicalNecessity >= 80 ? "text-emerald" : "text-amber" },
-        { label: "Denial Technicality Risk", value: null, level: analysis.claimScore.denialTechnicalityRisk, color: analysis.claimScore.denialTechnicalityRisk === "Low" ? "text-emerald" : "text-amber" },
-      ]
-    : fallbackBreakdowns;
-
+  const score = 78;
   const circumference = 2 * Math.PI * 70;
   const offset = circumference - (score / 100) * circumference;
 
@@ -29,6 +16,7 @@ export default function ClaimScorePanel() {
     <section aria-labelledby="claim-score-heading">
       <h2 id="claim-score-heading" className="text-xl font-bold text-foreground mb-6">Claim Strength Score</h2>
       <div className="flex flex-col items-center lg:flex-row gap-8 lg:items-start">
+        {/* Circular gauge */}
         <div className="relative flex items-center justify-center shrink-0" role="meter" aria-valuenow={score} aria-valuemin={0} aria-valuemax={100} aria-label={`Claim strength score: ${score} out of 100`}>
           <svg width="180" height="180" className="-rotate-90" aria-hidden="true">
             <circle cx="90" cy="90" r="70" fill="none" stroke="hsl(var(--muted))" strokeWidth="12" />
@@ -51,13 +39,13 @@ export default function ClaimScorePanel() {
 
         <div className="flex-1 space-y-4 w-full">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-light text-emerald text-sm font-medium" role="status">
-            {label}
+            Strong Appeal Potential
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
             {breakdowns.map((b) => (
               <div key={b.label} className="rounded-xl border border-border bg-card p-4">
                 <p className="text-sm text-muted-foreground mb-1">{b.label}</p>
-                {b.value !== null && b.value !== undefined ? (
+                {b.value !== null ? (
                   <div className="flex items-end gap-2">
                     <span className={`text-2xl font-bold ${b.color}`}>{b.value}%</span>
                     <div className="flex-1 h-2 rounded-full bg-muted overflow-hidden mb-1.5" role="progressbar" aria-valuenow={b.value} aria-valuemin={0} aria-valuemax={100} aria-label={`${b.label}: ${b.value}%`}>
@@ -70,7 +58,7 @@ export default function ClaimScorePanel() {
                     </div>
                   </div>
                 ) : (
-                  <span className={`text-2xl font-bold ${b.color}`}>{(b as any).level}</span>
+                  <span className={`text-2xl font-bold ${b.color}`}>{b.level}</span>
                 )}
               </div>
             ))}

@@ -1,24 +1,37 @@
 import { useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { useClaim } from "@/contexts/ClaimContext";
 
-const fallbackClauses = [
-  { original: "The requested procedure is deemed not medically necessary", explanation: "The insurer claims the surgery isn't required.", highlight: "not medically necessary" },
-  { original: "based on the documentation provided at the time of review.", explanation: "Documents submitted didn't prove the need.", highlight: "documentation provided" },
-  { original: "The member's plan excludes coverage for elective procedures", explanation: "Plan classifies this as 'elective' — can be challenged.", highlight: "elective procedures" },
-  { original: "unless prior authorization is obtained.", explanation: "Prior auth was required but not completed.", highlight: "prior authorization" },
+const denialClauses = [
+  {
+    original: "The requested procedure (CPT 29881) is deemed not medically necessary",
+    explanation: "The insurer is claiming the surgery isn't required for your health condition, which is the most common denial reason.",
+    highlight: "not medically necessary",
+  },
+  {
+    original: "based on the documentation provided at the time of pre-authorization review.",
+    explanation: "They're saying the documents submitted before the procedure didn't sufficiently prove the need.",
+    highlight: "documentation provided",
+  },
+  {
+    original: "The member's plan excludes coverage for elective orthopedic procedures",
+    explanation: "Your plan may classify this as 'elective' rather than 'necessary' — this can often be challenged with physician documentation.",
+    highlight: "elective orthopedic procedures",
+  },
+  {
+    original: "unless prior authorization is obtained from the utilization review department.",
+    explanation: "Prior authorization was required but may not have been completed. This is a procedural issue that can be addressed in appeal.",
+    highlight: "prior authorization",
+  },
 ];
 
 export default function DenialBreakdown() {
-  const { analysis } = useClaim();
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-
-  const denialClauses = analysis?.denialBreakdown?.clauses ?? fallbackClauses;
 
   return (
     <section aria-labelledby="denial-heading">
       <h2 id="denial-heading" className="text-xl font-bold text-foreground mb-6">Denial Breakdown</h2>
       <div className="grid lg:grid-cols-2 gap-6">
+        {/* Left: Original denial text */}
         <div className="rounded-xl border border-border bg-card p-6">
           <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">Original Denial Letter</h3>
           <div className="space-y-3 text-sm leading-relaxed text-foreground">
@@ -59,6 +72,7 @@ export default function DenialBreakdown() {
           </div>
         </div>
 
+        {/* Right: Explanations */}
         <div className="rounded-xl border border-border bg-card p-6">
           <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">Plain English Explanation</h3>
           <div className="space-y-4">

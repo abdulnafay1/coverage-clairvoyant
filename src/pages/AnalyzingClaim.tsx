@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Shield, FileSearch, Brain, BarChart3, CheckCircle } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import { useClaim } from "@/contexts/ClaimContext";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "@/hooks/use-toast";
 
 const stages = [
   { icon: FileSearch, label: "Scanning denial letter…", duration: 2500 },
@@ -16,46 +13,9 @@ const stages = [
 
 export default function AnalyzingClaim() {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const flow = searchParams.get("flow");
-  const { onboardingData, setAnalysis } = useClaim();
   const [progress, setProgress] = useState(0);
   const [stageIndex, setStageIndex] = useState(0);
-  const [apiDone, setApiDone] = useState(false);
-  const [animDone, setAnimDone] = useState(false);
 
-  // Call the edge function
-  useEffect(() => {
-    const analyze = async () => {
-      try {
-        const { data, error } = await supabase.functions.invoke("analyze-claim", {
-          body: {
-            filePaths: onboardingData?.filePaths || [],
-            denialType: onboardingData?.denialType || "",
-            form: onboardingData?.form || {},
-          },
-        });
-
-        if (error) throw error;
-        if (data?.error) throw new Error(data.error);
-
-        setAnalysis(data);
-        setApiDone(true);
-      } catch (e: any) {
-        console.error("Analysis failed:", e);
-        toast({
-          title: "Analysis failed",
-          description: e.message || "Something went wrong. Please try again.",
-          variant: "destructive",
-        });
-        // Still navigate to dashboard with null analysis (will show fallback)
-        setApiDone(true);
-      }
-    };
-    analyze();
-  }, [onboardingData, setAnalysis]);
-
-  // Progress animation (minimum 10s)
   useEffect(() => {
     const totalDuration = 10000;
     const interval = 50;
@@ -69,19 +29,12 @@ export default function AnalyzingClaim() {
 
       if (elapsed >= totalDuration) {
         clearInterval(timer);
-        setAnimDone(true);
+        setTimeout(() => navigate("/dashboard"), 400);
       }
     }, interval);
 
     return () => clearInterval(timer);
-  }, []);
-
-  // Navigate when both API and animation are done
-  useEffect(() => {
-    if (apiDone && animDone) {
-      setTimeout(() => navigate(flow === "file" ? "/file-claim/dashboard" : "/dashboard"), 400);
-    }
-  }, [apiDone, animDone, navigate]);
+  }, [navigate]);
 
   const CurrentIcon = stages[stageIndex].icon;
 

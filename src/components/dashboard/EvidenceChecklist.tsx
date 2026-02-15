@@ -1,7 +1,6 @@
 import { Check, AlertTriangle, Upload } from "lucide-react";
-import { useClaim } from "@/contexts/ClaimContext";
 
-const fallbackItems = [
+const items = [
   { label: "Physician Letter", status: "uploaded" as const, risk: "Critical — may result in automatic denial" },
   { label: "CPT Code Documentation", status: "uploaded" as const, risk: "High — weakens medical necessity argument" },
   { label: "Pre-Authorization Proof", status: "missing" as const, risk: "Critical — primary reason for current denial" },
@@ -10,9 +9,6 @@ const fallbackItems = [
 ];
 
 export default function EvidenceChecklist() {
-  const { analysis } = useClaim();
-  const items = analysis?.evidenceChecklist ?? fallbackItems;
-
   return (
     <section aria-labelledby="evidence-heading">
       <h2 id="evidence-heading" className="text-xl font-bold text-foreground mb-6">Evidence Checklist</h2>

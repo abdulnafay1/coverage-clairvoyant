@@ -1,4 +1,0 @@
-project_id = "oziatnylbfrlcrrbvxti"
-
-[functions.analyze-claim]
-verify_jwt = false

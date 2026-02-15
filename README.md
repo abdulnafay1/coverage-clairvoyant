@@ -1,98 +1,73 @@
-# CareClaim
+# Welcome to your Lovable project
 
-CareClaim is an AI-powered insurance assistant that helps people file stronger claims and successfully appeal denials.
+## Project info
 
-We turn complex insurance documents into clear, actionable guidance — so patients can recover the coverage they already paid for.
+**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 
----
+## How can I edit this code?
 
-## 🚨 The Problem
+There are several ways of editing your application.
 
-Health insurance denials are far more common than most people realize.
+**Use Lovable**
 
-- Over **73 million claims** are denied each year in the U.S.
-- **15–20%** of in-network claims face initial denial
-- Americans hold **$220+ billion** in medical debt
+Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
 
-But the biggest issue isn’t denial itself.
+Changes made via Lovable will be committed automatically to this repo.
 
----
+**Use your preferred IDE**
 
-## 💡 The Core Insight
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-The appeals process works — people just don’t use it.
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-- Only **2% of denied claims are appealed**
-- Yet **90% of appeals succeed** partially or fully
+Follow these steps:
 
-This gap exists because patients lack time, knowledge, and tools to navigate complex insurance language.
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
 
-CareClaim exists to close that gap.
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
 
----
+# Step 3: Install the necessary dependencies.
+npm i
 
-## 🧠 What CareClaim Does
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
+```
 
-CareClaim guides users through two key workflows:
+**Edit a file directly in GitHub**
 
-### 1️⃣ File a Claim
-Prepare complete, policy-aligned claims to reduce the chance of denial.
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-### 2️⃣ Appeal a Denial
-Analyze rejection reasons and generate a structured appeal package ready for submission.
+**Use GitHub Codespaces**
 
----
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-## ⚙️ Key Features
+## What technologies are used for this project?
 
-### AI Analysis
-Extracts coverage clauses and identifies denial reasons from uploaded documents.
+This project is built with:
 
-### Plain English Explanations
-Translates complex insurance jargon into clear guidance.
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-### Claim Strength Score
-Shows probability of a successful appeal based on policy alignment.
+## How can I deploy this project?
 
-### Evidence Checklist
-Ensures no critical documentation is missing.
+Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 
-### Deadline Tracking
-Monitors appeal timelines and prevents missed submission windows.
+## Can I connect a custom domain to my Lovable project?
 
-### Packet Builder
-Generates complete, properly formatted appeal letters and evidence packages.
+Yes, you can!
 
----
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-## 🔄 How It Works
-
-1. Upload policy documents and claim or denial letter
-2. AI analyzes coverage clauses and denial reasons
-3. Receive a claim strength score and checklist
-4. Generate a structured appeal packet ready for submission
-
-CareClaim transforms unstructured documents into structured action — automatically.
-
----
-
-## 🌍 Impact
-
-CareClaim aims to:
-
-- Reduce medical debt by helping patients recover eligible coverage
-- Increase appeal utilization by removing knowledge barriers
-- Democratize insurance literacy
-- Restore fairness in the claims process
-
-**Vision:** A future where no patient pays for care that should have been covered.
-
----
-
-## 🛠 Tech Stack
-
-- **Frontend:** React + TypeScript (Vite)
-- **UI:** Tailwind CSS + shadcn-ui
-- **Backend & Storage:** Supabase (Storage + Edge Functions)
-- **AI:** Google Gemini API (via hackathon track)
-- **State & Data:** React Query
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
